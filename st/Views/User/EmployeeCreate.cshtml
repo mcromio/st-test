@@ -1,0 +1,57 @@
+﻿@model Employee
+@{
+    ViewData["Title"] = "Добавление сотрудника";
+}
+@{ IEnumerable<Position> positions = ViewData["Positions"] as IEnumerable<Position>;}
+@{ IEnumerable<Employee> bosses = ViewData["Bosses"] as IEnumerable<Employee>;}
+
+@using (Html.BeginForm("AddEmployee", "User", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-sm-4">ФИО:</div>
+        <div class="col-sm-4">
+            @Html.TextBoxFor(model => model.Name)
+            @Html.ValidationMessageFor(m => m.Name, "", new { @class = "error" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">Дата приема на работу:</div>
+        <div class="col-sm-4">
+            @Html.TextBoxFor(model => model.AdmissionDate, new { placeholder = "дд/мм/гггг", Type = "Date" })
+            @Html.ValidationMessageFor(m => m.AdmissionDate, "", new { @class = "error" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">Должность:</div>
+        <div class="col-sm-4">
+            @Html.DropDownListFor(model => model.PosId, new SelectList(positions, "Id", "CodeName"))
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">Начальник:</div>
+        <div class="col-sm-4">
+            @Html.DropDownListFor(model => model.BossId, new SelectList(bosses, "Id", "Name"), "Выберите начальника")
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">Логин:</div>
+        <div class="col-sm-4">
+            @Html.TextBoxFor(model => model.UserName)
+            @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "error" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">Пароль:</div>
+        <div class="col-sm-4">
+            @Html.TextBoxFor(model => model.Password, new { Type= "password" })
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "error" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">Администратор:</div>
+        <div class="col-sm-4">@Html.CheckBoxFor(model => model.isAdmin)</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4"><input type="submit" value="Сохранить" /></div>
+    </div>
+}

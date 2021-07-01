@@ -1,0 +1,50 @@
+﻿@model Employee
+@{
+    ViewData["Title"] = "Список сотрудников";
+}
+
+@{ IEnumerable<Employee> employees = ViewData["Employees"] as IEnumerable<Employee>;}
+
+<a href="/User/EmployeeCreate" class="btn">Создать сотрудника</a>
+
+@using (Html.BeginForm("EmployeeList", "User", FormMethod.Get))
+{
+    <table>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdmissionDate)
+            </th>
+            <th>
+                Количество подчиненных
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in employees)
+        {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AdmissionDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SubEmployee.Count)
+        </td>
+        <td>
+            <input type="submit" formaction="/User/EmployeeDelete/@item.Id" value="Удалить" />
+        </td>
+    </tr>
+        }
+
+    </table>
+}

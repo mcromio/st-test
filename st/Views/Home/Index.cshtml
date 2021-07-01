@@ -1,0 +1,98 @@
+﻿@model SalaryQuery
+@{
+    ViewData["Title"] = "Home Page";
+    var logged_usr = ViewData["LoggedUser"] as Employee;
+    var entries = ViewData["SalaryReport"] as IEnumerable<SalaryEntry>;
+    string error=string.Empty;
+    if (TempData["SalaryError"]!=null)
+        error= TempData["SalaryError"].ToString();
+    if (entries == null)
+        entries = new List<SalaryEntry>();
+}
+
+
+@if (User.Identity.IsAuthenticated)
+{
+    <h2>Добро пожаловать в систему, @logged_usr.Name</h2>
+    <div>Информация о заработной плате:</div>
+
+    @using (Html.BeginForm("CalculateSalary", "User", FormMethod.Post))
+    {
+
+        <div class="row">
+            <div class="col-sm-4">Начало периода:</div>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(model => model.DtStart, new { placeholder = "дд/мм/гггг", Type = "Date" })
+                @Html.ValidationMessageFor(m => m.DtStart, "", new { @class = "error" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">Конец периода:</div>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(model => model.DtFinish, new { placeholder = "дд/мм/гггг", Type = "Date" })
+                @Html.ValidationMessageFor(m => m.DtFinish, "", new { @class = "error" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4"><input type="submit" value="Запросить" /></div>
+        </div>
+    }
+    if (error != string.Empty)
+    {
+        <div class="row">
+            <div class="alert" style="color:red;">@error</div>
+        </div>
+    }
+    if (entries.Count() > 0)
+    {
+            <table>
+                <tr>
+                    <th>
+                        Месяц
+                    </th>
+                    <th>
+                        Базовая ставка
+                    </th>
+                    <th>
+                        Надбавка за стаж
+                    </th>
+                    <th>
+                        Надбавка за подчиненных
+                    </th>
+                    <th>
+                        Итого
+                    </th>
+                </tr>
+                @foreach (var item in entries)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Month)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BaseRate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PeriodBonus)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ReferalBonus)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Total)
+                        </td>
+                    </tr>
+                }
+            </table>
+            <div>Итого за период по сотруднику: @entries.Select(q => q.Total).Sum()</div>
+    }
+
+}
+else
+{
+    <h2>Для продолжения работы с ПО необходимо авторизоваться</h2>
+    <div>Логин/пароль суперпользователя: admin/123</div>
+    <div>Пароль по умолчанию: 123</div>
+}
+
+

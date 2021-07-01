@@ -1,0 +1,34 @@
+﻿@model Employee
+@{
+    ViewData["Title"] = "Авторизация пользователя";
+    string error = string.Empty;
+    if (TempData["LoginError"] != null)
+        error = TempData["LoginError"].ToString();
+}
+
+@using (Html.BeginForm("Login", "User", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-sm-4">Логин:</div>
+        <div class="col-sm-4">
+            @Html.TextBoxFor(model => model.UserName)
+            @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "error" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">Пароль:</div>
+        <div class="col-sm-4">
+            @Html.TextBoxFor(model => model.Password, new { Type = "Password" })
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "error" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4"><input type="submit" value="Авторизоваться" /></div>
+    </div>
+}
+@if (error != string.Empty)
+{
+    <div class="row">
+        <div class="alert" style="color:red;">@error</div>
+    </div>
+}

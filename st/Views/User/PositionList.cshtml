@@ -1,0 +1,139 @@
+﻿@model Position
+@{
+    ViewData["Title"] = "Список должностей";
+}
+
+@{ IEnumerable<Position> positions = ViewData["Positions"] as IEnumerable<Position>;}
+
+
+@using (Html.BeginForm("PositionList", "User", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-sm-4">Наименование должности:</div>
+        <div class="col-sm-4">
+            @Html.TextBoxFor(model => model.CodeName)
+            @Html.ValidationMessageFor(m => m.CodeName, "", new { @class = "error" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">Базовая ставка:</div>
+        <div class="col-sm-4">
+            @Html.TextBoxFor(model => model.BaseRate)
+            @Html.ValidationMessageFor(m => m.BaseRate, "", new { @class = "error" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">Годовой бонус (в процентах):</div>
+        <div class="col-sm-4">
+            @Html.TextBoxFor(model => model.YearlyBonus, new { @type = "number" })
+            @Html.ValidationMessageFor(m => m.YearlyBonus, "", new { @class = "error" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">Предельно допустимый бонус ставки (в процентах):</div>
+        <div class="col-sm-4">
+            @Html.TextBoxFor(model => model.MaxYearlyBonus, new { @type = "number" })
+        @Html.ValidationMessageFor(m => m.MaxYearlyBonus, "", new { @class = "error" })
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-4">Бонус за подчиненных (в процентах):</div>
+    <div class="col-sm-4">
+        @Html.TextBoxFor(model => model.ReferalBonus)
+        @Html.ValidationMessageFor(m => m.ReferalBonus, "", new { @class = "error" })
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-4">Бонус за подчиненных первого уровня:</div>
+    <div class="col-sm-4">@Html.CheckBoxFor(model => model.isFirstLevelBonus)</div>
+</div>
+<div class="row">
+    <div class="col-sm-4">Может иметь подчиненных:</div>
+    <div class="col-sm-4">@Html.CheckBoxFor(model => model.haveSubordinates)</div>
+</div>
+<div class="row">
+    <div class="col-sm-4"><input type="submit" value="Сохранить" /></div>
+</div>
+}
+
+@using (Html.BeginForm("PositionList", "User", FormMethod.Get))
+{
+    <table>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CodeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BaseRate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YearlyBonus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaxYearlyBonus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReferalBonus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.haveSubordinates)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.isFirstLevelBonus)
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in positions)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CodeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BaseRate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.YearlyBonus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaxYearlyBonus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReferalBonus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.haveSubordinates)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.isFirstLevelBonus)
+                </td>
+                <td>
+                    <input type="submit" formaction="/User/PositionDelete/@item.Id" value="Удалить" />
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+@section Scripts
+{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script>
+        // переопределение валидации на стороне клиента
+        $.validator.methods.range = function (value, element, param) {
+            var globalizedValue = value.replace(",", ".");
+            return this.optional(element) || (globalizedValue >= param[0] && globalizedValue <= param[1]);
+        }
+
+        $.validator.methods.number = function (value, element) {
+            return this.optional(element) || /^-?(?:\d+|\d{1,3}(?:[\s\.,]\d{3})+)(?:[\.,]\d+)?$/.test(value);
+        }
+    </script>
+}
