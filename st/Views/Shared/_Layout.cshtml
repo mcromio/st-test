@@ -11,37 +11,56 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">st</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Расчет заработной платы</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 @if (User.Identity.IsAuthenticated)
                 {
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="EmployeeList">Список работников</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="PositionList">Список должностей</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Logout"><b>Выйти</b></a>
-                        </li>
-                    </ul>
-                </div>
+                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                        <ul class="navbar-nav flex-grow-1">
+                            @using (var db = new DatabaseContext())
+                            {
+                                var emps = db.Employees.Where(q => q.UserName == User.Identity.Name).ToList();
+                                if (emps.Count > 0)
+                                {
+                                    if (emps[0].isAdmin)
+                                    {
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="EmployeeList">Список работников</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="PositionList">Список должностей</a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        if (db.Employees.Where(q => q.BossId == emps[0].Id).ToList().Count() > 0)
+                                        {
+                                                <li class="nav-item">
+                                                    <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="SubList">Список подчиненных</a>
+                                                </li>
+                                        }
+                                    }
+                                }
+                            }
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Logout"><b>Выйти</b></a>
+                            </li>
+                        </ul>
+                    </div>
                 }
                 else
-            {
-            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                <ul class="navbar-nav flex-grow-1" style="flex-direction:row-reverse;">
-                    <li class="nav-item float-right">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Login">Авторизоваться</a>
-                    </li>
-                </ul>
-            </div>
-            }
+                {
+                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                        <ul class="navbar-nav flex-grow-1" style="flex-direction:row-reverse;">
+                            <li class="nav-item float-right">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Login">Авторизоваться</a>
+                            </li>
+                        </ul>
+                    </div>
+                }
             </div>
         </nav>
     </header>
@@ -53,7 +72,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2021 - st - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

@@ -172,6 +172,28 @@ namespace st.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+        [HttpGet]
+        public ActionResult SubList()
+        {
+            using (var db = new DatabaseContext())
+            {
+                if (User.Identity.IsAuthenticated)
+                {
+                    var ff = db.Employees.ToList();
+                    var emps = db.Employees.Where(q => q.UserName == User.Identity.Name).ToList();
+                    if (emps.Count > 0)
+                    {
+                        var subs = ReturnEmployees(emps[0]);
+                        ViewData["Subs"] = subs;
+                    }
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+        }
         //удалить должность
         [HttpGet]
         public ActionResult PositionDelete(string id)

@@ -1,0 +1,11 @@
+﻿@model SalaryQuery
+@{
+    var logged_usr = ViewData["LoggedUser"] as Employee;
+    ViewData["Title"] = "Зарпата: "+logged_usr.Name;
+    var entries = ViewData["SalaryReport"] as IEnumerable<SalaryEntry>;
+    string error = string.Empty;
+    if (TempData["SalaryError"] != null)
+        error = TempData["SalaryError"].ToString();
+    if (entries == null)
+        entries = new List<SalaryEntry>();
+}

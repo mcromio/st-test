@@ -1,0 +1,43 @@
+﻿@model Employee
+@{
+    ViewData["Title"] = "Список подчиненных";
+}
+
+@{ IEnumerable<Employee> employees = ViewData["Subs"] as IEnumerable<Employee>;}
+
+
+@using (Html.BeginForm("SubList", "User", FormMethod.Get))
+{
+    <table>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdmissionDate)
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in employees)
+        {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AdmissionDate)
+        </td>
+        <td>
+            <input type="submit" formaction="/User/EmployeeSalary/@item.Id" value="Отчет о ЗП" />
+        </td>
+    </tr>
+        }
+
+    </table>
+}
