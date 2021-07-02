@@ -1,11 +1,82 @@
 ﻿@model SalaryQuery
 @{
-    var logged_usr = ViewData["LoggedUser"] as Employee;
-    ViewData["Title"] = "Зарпата: "+logged_usr.Name;
-    var entries = ViewData["SalaryReport"] as IEnumerable<SalaryEntry>;
+    var usr = ViewData["SelectedUser"] as Employee;
+    ViewData["Title"] = "Зарпата: " + usr.Name;
+    var entries = new List<SalaryEntry>();
+    if (ViewData["SalaryReport"]!=null)
+        entries= ViewData["SalaryReport"] as List<SalaryEntry>;
     string error = string.Empty;
     if (TempData["SalaryError"] != null)
         error = TempData["SalaryError"].ToString();
-    if (entries == null)
-        entries = new List<SalaryEntry>();
 }
+<h3>Сотрудник: @usr.Name</h3>
+@using (Html.BeginForm("EmployeeSalary", "User", FormMethod.Post))
+{
+<input asp-for="UserGuid" type="hidden" value="@usr.Id">
+    <div class="row">
+        <div class="col-sm-4">Начало периода:</div>
+        <div class="col-sm-4">
+            @Html.TextBoxFor(model => model.DtStart, new { placeholder = "дд/мм/гггг", Type = "Date" })
+            @Html.ValidationMessageFor(m => m.DtStart, "", new { @class = "error" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">Конец периода:</div>
+        <div class="col-sm-4">
+            @Html.TextBoxFor(model => model.DtFinish, new { placeholder = "дд/мм/гггг", Type = "Date" })
+            @Html.ValidationMessageFor(m => m.DtFinish, "", new { @class = "error" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4"><input type="submit" value="Запросить" /></div>
+    </div>
+}
+    @if (error != string.Empty)
+    {
+<div class="row">
+    <div class="alert" style="color:red;">@error</div>
+</div>
+    }
+    @if (entries.Count() > 0)
+    {
+<table>
+    <tr>
+        <th>
+            Месяц
+        </th>
+        <th>
+            Базовая ставка
+        </th>
+        <th>
+            Надбавка за стаж
+        </th>
+        <th>
+            Надбавка за подчиненных
+        </th>
+        <th>
+            Итого
+        </th>
+    </tr>
+    @foreach (var item in entries)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Month)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BaseRate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PeriodBonus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReferalBonus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Total)
+            </td>
+        </tr>
+    }
+</table>
+<div>Итого за период по сотруднику: @((entries.Select(q => q.Total).Sum()).ToString ("0.00"))</div>
+    }

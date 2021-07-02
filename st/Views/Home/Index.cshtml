@@ -1,6 +1,6 @@
 ﻿@model SalaryQuery
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Главная";
     var logged_usr = ViewData["LoggedUser"] as Employee;
     var entries = ViewData["SalaryReport"] as IEnumerable<SalaryEntry>;
     string error=string.Empty;
@@ -84,7 +84,7 @@
                     </tr>
                 }
             </table>
-            <div>Итого за период по сотруднику: @entries.Select(q => q.Total).Sum()</div>
+            <div>Итого за период по сотруднику: @((entries.Select(q => q.Total).Sum()).ToString ("0.00"))</div>
     }
 
 }

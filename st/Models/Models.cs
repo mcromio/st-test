@@ -54,6 +54,7 @@ namespace st.Models
     }
     public class SalaryQuery
     {
+        public string UserGuid { get; set; }
         public DateTime DtStart { get; set; }
         public DateTime DtFinish { get; set; }
     }

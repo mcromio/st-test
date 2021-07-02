@@ -286,7 +286,7 @@ namespace st.Controllers
                 result.BaseRate = emp.Position.BaseRate;
                 var bonus = 0;
                 var admDt = emp.AdmissionDate;
-                while (admDt < dt)
+                while (admDt.AddYears(1).AddDays(-1) < dt)
                 {
                     admDt = admDt.AddYears(1);
                     bonus++;
@@ -332,8 +332,59 @@ namespace st.Controllers
                 result.AddRange(ReturnEmployees(ent));
             return result;
         }
-        
+        [HttpGet]
+        public ActionResult EmployeeSalary(string id)
+        {
+            using (var db=new DatabaseContext())
+            {
+                ViewData["SelectedUser"] = db.Employees.Find(id);
+            }
+            ViewData["SalaryReport"] = null;
+            if (TempData["SalaryReport"] != null)
+               ViewData["SalaryReport"] = Newtonsoft.Json.JsonConvert.DeserializeObject<List<SalaryEntry>>(TempData["SalaryReport"].ToString());
 
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EmployeeSalary(SalaryQuery query)
+        {
+            using (var db = new DatabaseContext())
+            {
+                List<SalaryEntry> result = new List<SalaryEntry>();
+                var ff = db.Employees.ToList();
+                var emp = db.Employees.Find(query.UserGuid);
+                if (emp!= null)
+                {
+                    ViewData["SelectedUser"] = emp;
+                    //ViewData["SalaryError"] = null;
+                    //ViewData["SalaryReport"] = null;
+                    if (query.DtStart >= query.DtFinish)
+                        TempData["SalaryError"] = "Дата начала периода должна быть меньше даты конца периода.";
+                    else if (emp.AdmissionDate > query.DtFinish)
+                        TempData["SalaryError"] = "Работник был принят на работу позднее указанного периода.";
+                    else
+                    {
+                        DateTime Dt;
+                        if (query.DtStart < emp.AdmissionDate)
+                            Dt = emp.AdmissionDate;
+                        else
+                            Dt = query.DtStart;
+                        while (Dt < query.DtFinish)
+                        {
+                            var entry = ReturnSalary(Dt, emp);
+                            result.Add(entry);
+                            Dt = Dt.AddMonths(1);
+                        }
+                        if (result.Count > 0)
+                            TempData["SalaryReport"] = Newtonsoft.Json.JsonConvert.SerializeObject(result);
+                        else
+                            TempData["SalaryError"] = "За выбранный период отсутствует информация о заработной плате работника.";
+                    }
+                }
+            }
+            return RedirectToAction("EmployeeSalary", "User");
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

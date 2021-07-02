@@ -24,6 +24,7 @@
                 Количество подчиненных
             </th>
             <th></th>
+            <th></th>
         </tr>
         @foreach (var item in employees)
         {
@@ -39,6 +40,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.SubEmployee.Count)
+        </td>
+        <td>
+            <input type="submit" formaction="/User/EmployeeSalary/@item.Id" value="Посмотреть ЗП" />
         </td>
         <td>
             <input type="submit" formaction="/User/EmployeeDelete/@item.Id" value="Удалить" />
