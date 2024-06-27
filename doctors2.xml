@@ -31,6 +31,7 @@
         <offers>
             <offer id="vrach1" group_id="1"> 
                 <name>Иванов Михаил Владимирович</name>
+				<url>https://anima39.ru/#popup:ivanov</url>
                 <price from="true">9900</price>
                 <oldprice>9900</oldprice>
                 <currencyId>RUR</currencyId>
@@ -79,6 +80,7 @@
             </offer>
 			<offer id="vrach2" group_id="2"> 
                 <name>Караваева Татьяна Артуровна</name>
+				<url>https://anima39.ru/#popup:karaeva</url>
                 <price from="true">9900</price>
                 <oldprice>9900</oldprice>
                 <currencyId>RUR</currencyId>
@@ -192,6 +194,7 @@
             </offer>
 			<offer id="vrach3" group_id="3"> 
                 <name>Пичиков Алексей Александрович</name>
+				<url>https://anima39.ru/#popup:pichikov</url>
                 <price from="true">7900</price>
                 <oldprice>7900</oldprice>
                 <currencyId>RUR</currencyId>
@@ -227,6 +230,7 @@
             </offer>
 			<offer id="vrach4" group_id="4"> 
                 <name>Черняков Игорь Владимирович</name>
+				<url>https://anima39.ru/#popup:chernyakov</url>
                 <price from="true">4900</price>
                 <oldprice>4900</oldprice>
                 <currencyId>RUR</currencyId>
@@ -253,6 +257,7 @@
             </offer>
 			<offer id="vrach5" group_id="5"> 
                 <name>Перминова Инна Витальевна</name>
+				<url>https://anima39.ru?vrach=perminova</url>
                 <price from="true">3900</price>
                 <oldprice>3900</oldprice>
                 <currencyId>RUR</currencyId>
@@ -287,6 +292,7 @@
             </offer>
 			<offer id="vrach6" group_id="6"> 
                 <name>Шедова Кристина Игоревна</name>
+				<url>https://anima39.ru?vrach=shedova</url>
                 <price from="true">3900</price>
                 <oldprice>3900</oldprice>
                 <currencyId>RUR</currencyId>
@@ -325,6 +331,7 @@
             </offer>
 			<offer id="vrach7" group_id="7"> 
                 <name>Заболотов Дмитрий Алексеевич</name>
+				<url>https://anima39.ru?vrach=zabolotov</url>
                 <price from="true">2000</price>
                 <oldprice>2000</oldprice>
                 <currencyId>RUR</currencyId>
@@ -359,6 +366,7 @@
             </offer>
 			<offer id="vrach8" group_id="8"> 
                 <name>Козак Полина Сергеевна</name>
+				<url>https://anima39.ru/#popup:polina</url>
                 <price from="true">6500</price>
                 <oldprice>6500</oldprice>
                 <currencyId>RUR</currencyId>
@@ -403,6 +411,7 @@
             </offer>
 			<offer id="vrach9" group_id="9"> 
                 <name>Гимпель Илья Сергеевич</name>
+				<url>https://anima39.ru/#popup:gimpel</url>
                 <price from="true">5000</price>
                 <oldprice>5000</oldprice>
                 <currencyId>RUR</currencyId>
@@ -440,6 +449,7 @@
             </offer>
 			<offer id="vrach10" group_id="10"> 
                 <name>Азарян Кристина Давидовна</name>
+				<url>https://anima39.ru?vrach=azaryan</url>
                 <price from="true">2000</price>
                 <oldprice>2000</oldprice>
                 <currencyId>RUR</currencyId>
@@ -474,6 +484,7 @@
             </offer>
 			<offer id="vrach11" group_id="11"> 
                 <name>Коробицына Мария Александровна</name>
+				<url>https://anima39.ru?vrach=korobitsina</url>
                 <price from="true">3900</price>
                 <oldprice>3900</oldprice>
                 <currencyId>RUR</currencyId>
