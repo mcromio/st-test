@@ -289,46 +289,7 @@
                 <param name="Образование - 2" unit="Дата">2002</param>
                 <param name="Образование - 2" unit="Название">Интернатура</param>
                 <param name="Образование - 2" unit="Специальность">Психиатрия</param>
-            </offer>
-			<offer id="vrach6" group_id="6"> 
-                <name>Шедова Кристина Игоревна</name>
-				<url>https://anima39.ru?vrach=shedova</url>
-                <price from="true">3900</price>
-                <oldprice>3900</oldprice>
-                <currencyId>RUR</currencyId>
-                <sales_notes>Первичный прием</sales_notes>
-                <set-ids>psiholog</set-ids>
-                <picture>https://static.tildacdn.com/tild3130-3030-4234-a266-643564626438/_4_1.png</picture>
-                <description>Психолог, гештальт-терапевт.
-                </description>
-                <categoryId>1</categoryId>
-                <param name="Фамилия">Шедова</param>
-                <param name="Имя">Кристина</param>
-                <param name="Отчество">Игоревна</param>
-				<param name="Годы опыта">8</param>
-                <param name="Начало карьеры">2016-01-01</param>
-                <param name="Город">г. Калининград</param>
-                <param name="Взрослый врач">true</param>
-				<param name="Детский врач">true</param>
-                <param name="Город клиники">г. Калининград</param>
-                <param name="Адрес клиники">ул. Ростовская, 5</param>
-                <param name="Название клиники">Медицинский центр АНИМА</param>
-                <param name="Возможность записи">false</param>
-                <param name="Онлайн-расписание">false</param>
-                <param name="Телефон для записи">8(4012)611333</param>
-				<param name="Образование - 1" unit="Организация">Московский Международный университет</param>
-                <param name="Образование - 1" unit="Дата">2016</param>
-                <param name="Образование - 1" unit="Название">Базовое образование</param>
-                <param name="Образование - 1" unit="Специальность">Психология</param>
-				<param name="Образование - 2" unit="Организация">Московский Гештальт Институт</param>
-                <param name="Образование - 2" unit="Дата">2019</param>
-                <param name="Образование - 2" unit="Название">Повышение квалификации</param>
-                <param name="Образование - 2" unit="Специальность">Психотерапия</param>
-				<param name="Образование - 3" unit="Организация">Московский институт психоанализа</param>
-                <param name="Образование - 3" unit="Дата">2024</param>
-                <param name="Образование - 3" unit="Название">Аспирантура</param>
-                <param name="Образование - 3" unit="Специальность">Психотерапия</param>
-            </offer>
+            </offer>			
 			<offer id="vrach7" group_id="7"> 
                 <name>Заболотов Дмитрий Алексеевич</name>
 				<url>https://anima39.ru?vrach=zabolotov</url>
@@ -408,45 +369,7 @@
                 <param name="Образование - 2" unit="Дата">2020</param>
                 <param name="Образование - 2" unit="Название">Ординатура</param>
                 <param name="Образование - 2" unit="Специальность">Психиатрия</param>
-            </offer>
-			<offer id="vrach9" group_id="9"> 
-                <name>Гимпель Илья Сергеевич</name>
-				<url>https://anima39.ru/#popup:gimpel</url>
-                <price from="true">5000</price>
-                <oldprice>5000</oldprice>
-                <currencyId>RUR</currencyId>
-                <sales_notes>Первичный прием</sales_notes>
-                <set-ids>psiholog</set-ids>
-                <picture>https://static.tildacdn.com/tild6130-6438-4435-b436-376264353632/_9_1.png</picture>
-                <description>В своей работе придерживаюсь принципов доказательной медицины и психологии. Это значит, что в моей практике есть место только методам, прошедшим глубокую научную проверку, показавшим свою эффективность и безопасность. Также благодаря опыту работы в психиатрической больнице я могу эффективно взаимодействовать с врачами: психиатрами, психотерапевтами и неврологами. Это способствует соблюдению принципа комплексной помощи.
-				С чем я могу помочь?
-				* Частые панические атаки
-				* Тревожные и депрессивные состояния
-				* Навязчивые мысли и действия
-				* Отвлекаемость, трудности с концентрацией внимания
-				* Гневливость и агрессивность
-				Имею опыт работы с пациентами с БАР, ПРЛ, СДВГ, ГТР, ОКР и другими расстройствами.
-                </description>
-                <categoryId>1</categoryId>
-                <param name="Фамилия">Гимпель</param>
-                <param name="Имя">Илья</param>
-                <param name="Отчество">Сергеевич</param>
-				<param name="Годы опыта">4</param>
-                <param name="Начало карьеры">2020-01-01</param>
-                <param name="Город">г. Калининград</param>
-                <param name="Взрослый врач">true</param>
-				<param name="Детский врач">true</param>
-                <param name="Город клиники">г. Калининград</param>
-                <param name="Адрес клиники">ул. Ростовская, 5</param>
-                <param name="Название клиники">Медицинский центр АНИМА</param>
-                <param name="Возможность записи">false</param>
-                <param name="Онлайн-расписание">false</param>
-                <param name="Телефон для записи">8(4012)611333</param>
-				<param name="Образование - 1" unit="Организация">Медицинский институт Балтийского Федерального Университета им И. Канта</param>
-                <param name="Образование - 1" unit="Дата">2020</param>
-                <param name="Образование - 1" unit="Название">Базовое образование</param>
-                <param name="Образование - 1" unit="Специальность">Клиническая психология</param>
-            </offer>
+            </offer>			
 			<offer id="vrach10" group_id="10"> 
                 <name>Азарян Кристина Давидовна</name>
 				<url>https://anima39.ru?vrach=azaryan</url>
